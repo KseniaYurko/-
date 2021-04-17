@@ -10,4 +10,4 @@ def num2dac(val):
     binary = bin(val)[2:].zfill(8)
     for i in range(8):
         GPIO.output(N[i], int(binary[num - 1 - i]))
-num2dc (3)
+num2dac(3)

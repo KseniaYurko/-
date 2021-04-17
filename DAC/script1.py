@@ -27,7 +27,8 @@ if __name__ == '__main__':
                 break
             if value < 0 or value > 255:
                 raise Exception
-            num2dac(value)
+            a = num2dac(value)
+            print(a)
             time.sleep(0.3)
     finally:
         DarkALL()
