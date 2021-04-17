@@ -6,25 +6,22 @@ N = [10, 9, 11, 5, 6, 13, 19, 26]
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(N, GPIO.OUT)
-num = 8
-timee = 0.05
-
 
 def num2dac(val):
-    binary = bin(val)[2:].zfill(num)
-    for i in range(num):
-        GPIO.output(N[i], int(binary[num - 1 - i]))
+    binary = bin(val)[2:].zfill(8)
+    for i in range(8):
+        GPIO.output(N[i], int(binary[7 - i]))
 
 
 def DarkALL():
-    for i in range(num):
+    for i in range(8):
         GPIO.output(N[i], 0)
 
 
 if __name__ == '__main__':
     try:
         while True:
-            value = int(input("Print value(-1 to exit)"))
+            value = int(input("Print value (-1 to exit) "))
             DarkALL()
             if value == -1:
                 break
@@ -35,3 +32,5 @@ if __name__ == '__main__':
     finally:
         DarkALL()
         print("Quit")
+        GPIO.cleanup()
+        
