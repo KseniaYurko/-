@@ -2,10 +2,11 @@ import RPi.GPIO as GPIO
 import time
 import script1 as sc1
 
-N = [10, 9, 11, 5, 6, 13, 19, 26]
+N = [26, 19, 13, 6, 5, 11, 9, 10]
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(N, GPIO.OUT)
+GPIO.setup(4, GPIO.OUT)
 
 repNum = (int(input('Введите число повторений: ')))
 i = 0
@@ -20,15 +21,21 @@ try:
             
             while i<=255:
                 binary = sc1.num2dac(i) 
-                time.sleep(0.001)
-                print(i)
+                time.sleep(0.01)
                 i+=1
-            
+                GPIO.output(4,0)
+                time.sleep(0.0098)
+                GPIO.output(4,1)
+                time.sleep(0.0002) 
+                           
             while i>0:
                 binary = sc1.num2dac(i)
-                time.sleep(0.001)
-                print(i)
+                time.sleep(0.01)
                 i-=1
+                GPIO.output(4,0)
+                time.sleep(0.0098)
+                GPIO.output(4,1)
+                time.sleep(0.0002) 
 
 finally:
     DarkALL()

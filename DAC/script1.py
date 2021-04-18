@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-N = [10, 9, 11, 5, 6, 13, 19, 26]
+N = [26, 19, 13, 6, 5, 11, 9, 10]
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -9,6 +9,7 @@ GPIO.setup(N, GPIO.OUT)
 
 def num2dac(val):
     binary = bin(val)[2:].zfill(8)
+    print (binary)
     for i in range(8):
         GPIO.output(N[i], int(binary[7 - i]))
 
@@ -16,7 +17,6 @@ def num2dac(val):
 def DarkALL():
     for i in range(8):
         GPIO.output(N[i], 0)
-
 
 if __name__ == '__main__':
     try:
