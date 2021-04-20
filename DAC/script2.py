@@ -21,10 +21,10 @@ try:
             
             while i<=255:
                 binary = sc1.num2dac(i) 
-                time.sleep(0.01)
+                time.sleep(0.005)
                 i+=1
                 GPIO.output(4,0)
-                time.sleep(0.0098)
+                time.sleep(0.0048)
                 GPIO.output(4,1)
                 time.sleep(0.0002) 
                            
