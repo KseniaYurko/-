@@ -12,26 +12,25 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(N, GPIO.OUT)
 GPIO.setup(4, GPIO.OUT)
 
-frequency = 200
-timee = 10
+frequency = int(input('Частота: '))
+timee = int(input('Время: '))
+SF = int(input('Частота дискредитации: '))
 
 def DarkALL():
     for i in range(8):
         GPIO.output(N[i], 0)
 
 try:
-    y = lambda x: 255*(np.sin(2*np.pi*frequency*x))
-    fig = plt.subplots()
-    x = np.linspace(0, timee, 1000)
+    x = np.linspace(0, timee, SF)
+    y = 255*(np.sin(2*np.pi*frequency*x))
+    y_new = np.round(y,0)
+    y_final = y_new.astype(np.int32)
     
-    for i in x:
-        print(y)
-      #  y = sc1.num2dac(i) 
-       # time.sleep(0.005)
-      #  GPIO.output(4,0)
-      #  time.sleep(0.0048)
-      #  GPIO.output(4,1)
-      #  time.sleep(0.0002) 
+    fig = plt.subplots()
+  
+    for i in y_final:
+        a = sc1.num2dac(i) 
+        time.sleep(1/SF)
     plt.plot(x, y(x))
     plt.show()
 
