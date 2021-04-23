@@ -9,7 +9,7 @@ GPIO.setup(N, GPIO.OUT)
 
 def num2dac(val):
     binary = bin(val)[2:].zfill(8)
-
+  
     for i in range(8):
         GPIO.output(N[i], int(binary[7 - i]))
 
@@ -17,6 +17,11 @@ def num2dac(val):
 def DarkALL():
     for i in range(8):
         GPIO.output(N[i], 0)
+
+def lightMas(mas):
+
+    for i in range(8):
+        GPIO.output(N[i],mas[i])        
 
 if __name__ == '__main__':
     try:
