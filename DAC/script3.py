@@ -10,9 +10,9 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(N, GPIO.OUT)
 GPIO.setup(4, GPIO.OUT)
 
-frequency = 300
-timee = 20
-SF = 1000
+frequency = int(input('Частота: '))
+timee = int(input('Время выполнения программы: : '))
+SF = int(input('Частота дискредитации: '))
 
 def DarkALL():
     for i in range(8):
@@ -38,7 +38,7 @@ try:
         for i in y_final:
  
             y_final_new = sc1.num2dac(i)      
-            time.sleep(1/1000)
+            time.sleep(1/SF)
             GPIO.output(4,0)
             GPIO.output(4,1)
 

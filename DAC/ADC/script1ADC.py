@@ -33,7 +33,7 @@ try:
                 
             a = num2dac(value)
             time.sleep(0.001)
-            if GPIO.input(4) == 0:
+            if GPIO.input(4) == 1:
                 print(a, "-", (round(value*3.26/255*100))/100, "V")
                 
 
