@@ -24,23 +24,24 @@ val = 10000000
 
 try:
 
+
+        list_val = list(str(val))
         for i in range(7):
             
             if GPIO.input(4) == 0:
-                list_val = list(str(val))
+                
                 list_val.insert(i, 1)
-                list_val.pop(-1)
+                list_val.pop(8)
 
             if GPIO.input(4) == 1:
             
-                list_val = list(str(val))
                 list_val.insert(i, 0)
-                list_val.pop(-1) 
+                list_val.pop(8) 
 
-        list_val_int = [int(x) for x in list_val]
-        print(list_val_int)
-        for i in range (7):
-            GPIO.output(N[i],list_val_int[i])          
+            list_val_int = [int(x) for x in list_val]
+            print(list_val_int)
+            for i in range (7):
+                GPIO.output(N[i],list_val_int[i])          
             
         result = int(''.join(map(str, list_val)))
         print(result)

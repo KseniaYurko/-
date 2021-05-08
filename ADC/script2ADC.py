@@ -7,6 +7,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(N, GPIO.OUT)
 GPIO.setup(17, GPIO.OUT)
+GPIO.setup(4, GPIO.OUT)
+GPIO.setup(14, GPIO.IN)
 
 def num2dac(val):
     binary = bin(val)[2:].zfill(8)
@@ -18,7 +20,7 @@ def DarkALL():
         GPIO.output(N[i], 0)
 DarkALL()
 
-GPIO.setup(4, GPIO.IN)
+GPIO.setup(14, GPIO.IN)
 GPIO.output(17, 1)
 
 try:
@@ -27,9 +29,12 @@ try:
         print(1000000)
         while True:
             for j in range (0, 2**8):
-                num2dac(j)
-                time.sleep(0.001)
-                if GPIO.input(4) == 0:
+                a =num2dac(j)
+                GPIO.output(4,1)
+                GPIO.output(4,0)        
+                time.sleep(0.01)
+                
+                if GPIO.input(14) == 0:
                     print(j, "-", (round(j*3.26/255*100))/100, "V")
                     break
   
