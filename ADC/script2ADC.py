@@ -24,19 +24,20 @@ GPIO.setup(14, GPIO.IN)
 GPIO.output(17, 1)
 
 try:
-    num2dac(128)
-    if GPIO.input(17) == 1:
+    if GPIO.input(14) == 0:
         print(1000000)
-        while True:
+        num2dac(128)
+    
+    while True:
             for j in range (0, 2**8):
-                a =num2dac(j)
+                a =num2dac(j) 
                 GPIO.output(4,1)
-                GPIO.output(4,0)        
-                time.sleep(0.01)
+                GPIO.output(4,0)       
+                time.sleep(0.0001)
                 
-                if GPIO.input(14) == 0:
-                    print(j, "-", (round(j*3.26/255*100))/100, "V")
-                    break
+                if GPIO.input(14) == 1:
+                    print(j, "-", (round(j*3.26/255*100))/100, "V") 
+                    
   
 
 except ZeroDivisionError:

@@ -32,13 +32,19 @@ try:
         
             if value < 0 or value > 255:
                 raise Exception
-                
-            a = num2dac(value)
-            GPIO.output(4,1)
-            GPIO.output(4,0)
-            time.sleep(0.001)
             if GPIO.input(14) == 1:
-                print(a, "-", (round(value*3.26/255*100))/100, "V")
+
+                a = num2dac(value)
+                GPIO.output(4,1)
+                GPIO.output(4,0)
+                time.sleep(0.001)
+
+            if GPIO.input(14) == 0:
+                a = num2dac(value)
+                GPIO.output(4,1)
+                GPIO.output(4,0)
+                time.sleep(0.001)
+                print(a, "-", (round(value*3.31/255*100))/100, "V")
                 
 
 except ZeroDivisionError:
@@ -48,4 +54,4 @@ except ValueError:
 
 finally:
     DarkALL()
-    GPIO.cleanup()
+    GPIO.cleanup() 
