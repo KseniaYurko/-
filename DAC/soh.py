@@ -50,8 +50,7 @@ for i in range(tim):
 
 tt = np.arange(0, tim, 1)
 plt.plot(tt, mas)
-plt.xlabel('Время в миллисекундах')
-plt.ylabel('Напряжение в процентах от MAX')
+c
 plt.show()
 time.sleep(1)
 plt.close()
