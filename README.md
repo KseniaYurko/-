@@ -1,2 +1,2 @@
-# ЦАП
-Cборка схемы для RPi с использованием ЦАПа AD7302
+# DAC and ADC (R2R)
+Scripts MIPT course GET
