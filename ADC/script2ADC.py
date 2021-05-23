@@ -7,8 +7,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(N, GPIO.OUT)
 GPIO.setup(17, GPIO.OUT)
-GPIO.setup(4, GPIO.OUT)
-GPIO.setup(14, GPIO.IN)
+GPIO.setup(4, GPIO.IN)
 
 def num2dac(val):
     binary = bin(val)[2:].zfill(8)
@@ -20,24 +19,27 @@ def DarkALL():
         GPIO.output(N[i], 0)
 DarkALL()
 
-GPIO.setup(14, GPIO.IN)
+GPIO.setup(4, GPIO.IN)
 GPIO.output(17, 1)
 
 try:
-    if GPIO.input(14) == 0:
-        print(1000000)
-        num2dac(128)
+    
+    voltage = 0
+    newVoltage = 0
     
     while True:
-            for j in range (0, 2**8):
-                a =num2dac(j) 
-                GPIO.output(4,1)
-                GPIO.output(4,0)       
-                time.sleep(0.0001)
-                
-                if GPIO.input(14) == 1:
-                    print(j, "-", (round(j*3.26/255*100))/100, "V") 
-                    
+    
+        for i in range (0, 255):
+            num2dac (i)
+            time.sleep (0.0001)
+
+            if GPIO.input (4) != 1:
+                newVoltage = 3.3*float(i)/255
+                break
+    
+        if abs(newVoltage - voltage) > 1.0/255.0:
+            print (round(newVoltage, 2),' - ' , int(newVoltage*255/3.3))
+            voltage = newVoltage
   
 
 except ZeroDivisionError:

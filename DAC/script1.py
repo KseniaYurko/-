@@ -22,10 +22,12 @@ def DarkALL():
 
 try:
     while True:
+        
         value = int(input("Print value (-1 to exit) "))
         DarkALL()
         if value == -1:
             break
+
         if value < 0 or value > 255:
             raise Exception
         a = num2dac(value)

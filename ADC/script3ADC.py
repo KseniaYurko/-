@@ -9,9 +9,14 @@ GPIO.setup(N, GPIO.OUT)
 GPIO.setup(17, GPIO.OUT)
 
 def num2dac(val):
+
     binary = bin(val)[2:].zfill(8)
+    binary = binary.replace("0b", '')
+    binary = binary.replace("b", '')
+    
     for i in range(8):
         GPIO.output(N[i], int(binary[7 - i]))
+
 
 def DarkALL():
     for i in range(8):
