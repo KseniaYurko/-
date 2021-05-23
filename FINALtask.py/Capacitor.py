@@ -61,7 +61,7 @@ def mainCODE():
         counter_file.close()
 
     file = 'data{}.txt'.format(n)
-    open(os.path.join(path, file), "w")
+    open(os.path.join(path, file), 'w')
     
     GPIO.output(voltage3, 1)
     timeline = []
@@ -71,27 +71,34 @@ def mainCODE():
 
 
     while True:
+        f = open(os.path.join(path, file), 'w')
+        
+        a = f.write('Зарядка:\n\n')
         while value <= 251:
-            file.wl('Зарядка:')
-
+            
             value = binADC()
             measure.append(round((value*3.26/255), 2))
             timeline.append(round(time.time()-delta, 2))
             
-            file.wl(round((value*3.26/255), 2), ' - voltage',round(time.time()-delta, 2), ' - time')
-            
+            a = f.write(str(round((value*3.26/255), 2)))
+            a = f.write(' - voltage  ')
+            a = f.write(str(round(time.time()-delta, 2)))
+            a = f.write(' - time\n')
+
             print(value, '', round((value*3.26/255), 2),'V')
             level()
-
+        
+        a = f.write('Разрядка:\n\n')
         while value > 1:
-            file.wl('Разрядка:')
-
             GPIO.output(voltage3, 0)
             value = binADC()
             measure.append(round((value*3.26/255), 2))
             timeline.append(round(time.time()-delta, 2))
 
-            file.wl(round((value*3.26/255), 2), ' - voltage',round(time.time()-delta, 2), ' - time')
+            a = f.write(str(round((value*3.26/255), 2)))
+            a = f.write(' - voltage  ')
+            a = f.write(str(round(time.time()-delta, 2)))
+            a = f.write(' - time\n')
 
             print(value, '', round((value*3.26/255), 2),'V')
             level()
